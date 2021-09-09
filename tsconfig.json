@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "outDir": "dist/js",   
+        "noEmitOnError": true, //Não gera o .js correspondente em 'dist' caso exista algum erro de compilação
+        "noImplicitAny": true 
+    },
+    "include": [
+        "app/**/*"
+    ]
+}
