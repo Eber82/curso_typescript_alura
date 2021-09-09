@@ -1,4 +1,4 @@
-export class View <T>{
+export abstract class View <T>{
 
     protected elemento : HTMLElement;
 
@@ -6,11 +6,8 @@ export class View <T>{
         this.elemento = document.querySelector(seletor);
     }
 
-    template(model : T) : string{
-        throw console.error("A classe filha precisa reescrever o metodo 'template' da classe pai 'View'");
+    abstract template(model : T) : string
         
-    }
-
     update(model: T) : void{
         
         const template = this.template(model);
