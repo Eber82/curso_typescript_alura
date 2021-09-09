@@ -16,9 +16,9 @@ export class NegociacoesView extends View {
                     ${model.lista().map(negociacao => {
             return `
                             <tr>
-                                <td>${this.formatarData(negociacao.getData())}</td> 
+                                <td>${this.formatarData(negociacao.data)}</td> 
                                 <td>${negociacao.valor}</td>
-                                <td>${negociacao.quantidade}</td>
+                                <td>${negociacao.quantidade}</td> 
                             </tr>
                         `;
         }).join('')}

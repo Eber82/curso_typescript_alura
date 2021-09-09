@@ -13,12 +13,12 @@ export class Negociacao {
 
 
     //Programação Defensiva. a data tem que ser imutavel, mas o "private" e o "readonly" não protegem o objeto de ter seus metodos acessados
-    getData() : Date{
+    public get data() : Date{
         const  data = new Date (this._data.getTime()); 
         return data;
     }
     
-    get volume() : number {
+    public get volume() : number {
         return this.valor * this.quantidade;
     }
 }

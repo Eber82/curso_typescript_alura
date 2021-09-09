@@ -20,17 +20,19 @@ export class NegociacaoController{
 
     }
 
-    adicionaNegociacao() : void{
+    public adicionaNegociacao() : void{
        
         const negociacao : Negociacao = this.criaNegociacao();
         this.negociacoes.adiciona(negociacao);
-        this.negociacoesView.update(this.negociacoes);
-        this.mensagemView.update("Negociação inserida com sucesso");
-        
-
+        this.atualizaView();
         this.limpaFormulario();
     }
 
+
+    private atualizaView() {
+        this.negociacoesView.update(this.negociacoes);
+        this.mensagemView.update("Negociação inserida com sucesso");
+    }
 
     private criaNegociacao() : Negociacao {
         

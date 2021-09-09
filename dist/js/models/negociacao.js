@@ -8,7 +8,7 @@ export class Negociacao {
         this.valor = valor;
     }
     //Programação Defensiva. a data tem que ser imutavel, mas o "private" e o "readonly" não protegem o objeto de ter seus metodos acessados
-    getData() {
+    get data() {
         const data = new Date(this._data.getTime());
         return data;
     }
