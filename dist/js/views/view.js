@@ -6,7 +6,6 @@ export class View {
         console.log(quemEnviou);
         if (testeParametroOpcional) {
             this.testeParametroOpcional = testeParametroOpcional;
-            //console.log(testeParametroOpcional);
         }
     }
     update(model) {

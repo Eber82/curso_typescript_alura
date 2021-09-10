@@ -34,7 +34,7 @@ export class NegociacaoController {
         this.mensagemView.update("Negociação inserida com sucesso");
     }
     criaNegociacao() {
-        const exp = /-/g; //Expressão regular para pegar todos o '-'. o g é de global, pegar todos
+        const exp = /-/g;
         const dataString = this.inputData.value.replace(exp, ',');
         const quantidadeString = this.inputQuantidade.value;
         const valorString = this.inputValor.value;
