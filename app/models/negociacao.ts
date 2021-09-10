@@ -21,4 +21,15 @@ export class Negociacao {
     public get volume() : number {
         return this.valor * this.quantidade;
     }
+
+    public static criaDe(dataString : string, quantidadeString : string, valorString : string ) : Negociacao{
+        
+        const exp = /-/g; //Expressão regular para pegar todos o '-'. o g é de global, pegar todos
+        const data = new Date(dataString.replace(exp, ','));
+        const quantidade = parseInt(quantidadeString);
+        const valor = parseFloat(valorString);
+
+        return new Negociacao(data,quantidade,valor);
+    }
+
 }

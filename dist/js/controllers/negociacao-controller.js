@@ -6,8 +6,8 @@ import { DiasDaSemana } from "../enums/dias-da-semana.js";
 export class NegociacaoController {
     constructor() {
         this.negociacoes = new Negociacoes();
-        this.negociacoesView = new NegociacoesView("#tabelaNegociacoes");
-        this.mensagemView = new MensagemView("#mensagemView");
+        this.negociacoesView = new NegociacoesView("#tabelaNegociacoes", true, 'NegociacoesView');
+        this.mensagemView = new MensagemView("#mensagemView", false, 'MensagemView');
         this.inputData = document.querySelector("#data");
         this.inputValor = document.querySelector("#valor");
         this.inputQuantidade = document.querySelector("#quantidade");
@@ -35,10 +35,10 @@ export class NegociacaoController {
     }
     criaNegociacao() {
         const exp = /-/g; //Expressão regular para pegar todos o '-'. o g é de global, pegar todos
-        const data = new Date(this.inputData.value.replace(exp, ','));
-        const quantidade = parseInt(this.inputQuantidade.value);
-        const valor = parseFloat(this.inputValor.value);
-        return new Negociacao(data, quantidade, valor);
+        const dataString = this.inputData.value.replace(exp, ',');
+        const quantidadeString = this.inputQuantidade.value;
+        const valorString = this.inputValor.value;
+        return Negociacao.criaDe(dataString, quantidadeString, valorString);
     }
     limpaFormulario() {
         this.inputData.value = '';

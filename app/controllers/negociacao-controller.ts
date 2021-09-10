@@ -10,8 +10,8 @@ export class NegociacaoController{
     private inputValor : HTMLInputElement;
     private inputQuantidade : HTMLInputElement;
     private negociacoes : Negociacoes = new Negociacoes();
-    private negociacoesView : NegociacoesView = new NegociacoesView("#tabelaNegociacoes");
-    private mensagemView : MensagemView = new MensagemView("#mensagemView");
+    private negociacoesView : NegociacoesView = new NegociacoesView("#tabelaNegociacoes",true,'NegociacoesView');
+    private mensagemView : MensagemView = new MensagemView("#mensagemView",false,'MensagemView');
 
     constructor(){
         this.inputData = document.querySelector("#data");
@@ -22,7 +22,7 @@ export class NegociacaoController{
     }
 
     public adicionaNegociacao() : void{
-       
+
         const negociacao : Negociacao = this.criaNegociacao();
         
         if (!this.eHdiaDaSemana(negociacao.data)){
@@ -55,12 +55,11 @@ export class NegociacaoController{
     private criaNegociacao() : Negociacao {
         
         const exp = /-/g; //Expressão regular para pegar todos o '-'. o g é de global, pegar todos
-        const data = new Date(this.inputData.value.replace(exp, ','));
-        const quantidade = parseInt(this.inputQuantidade.value);
-        const valor = parseFloat(this.inputValor.value);
+        const dataString = this.inputData.value.replace(exp, ',');
+        const quantidadeString = this.inputQuantidade.value;
+        const valorString = this.inputValor.value;
 
-        return new Negociacao(data,quantidade,valor);
-
+        return Negociacao.criaDe(dataString, quantidadeString, valorString);
     }
 
     private limpaFormulario() : void {
