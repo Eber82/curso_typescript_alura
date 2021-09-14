@@ -1,12 +1,14 @@
 {
     "compilerOptions": {
         "target": "ES6",
-        "outDir": "dist/js",   
+        "outDir": "app/dist/js",   
         "noEmitOnError": true, //Não gera o .js correspondente em 'dist' caso exista algum erro de compilação
         "noImplicitAny": true,
-        "removeComments": true // Remove os comentários no .js resultante da compilação 
+        "removeComments": true, // Remove os comentários no .js resultante da compilação 
+        "strictNullChecks": true,
+        "experimentalDecorators": true //Ativa o uso dos decorators
     },
     "include": [
-        "app/**/*"
+        "app/src/**/*"
     ]
 }

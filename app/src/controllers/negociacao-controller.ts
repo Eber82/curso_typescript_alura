@@ -3,6 +3,7 @@ import { Negociacoes } from "../models/negociacoes.js";
 import { NegociacoesView } from "../views/negociacoes-view.js";
 import { MensagemView } from "../views/mensagem-view.js";
 import { DiasDaSemana } from "../enums/dias-da-semana.js";
+import { logarTempoExecucao } from "../decorators/logar-tempo-execucao.js";
 
 export class NegociacaoController{
 
@@ -14,13 +15,17 @@ export class NegociacaoController{
     private mensagemView : MensagemView = new MensagemView("#mensagemView",false,'MensagemView');
 
     constructor(){
-        this.inputData = document.querySelector("#data");
-        this.inputValor = document.querySelector("#valor");
-        this.inputQuantidade = document.querySelector("#quantidade");
+        
+        // document.querySelector() pode retornar null tb, estão se a conf de compilação "strictNullChecks" estiver ativa, devo explicitar o retorno que espero
+        
+        this.inputData = document.querySelector("#data") as HTMLInputElement;
+        this.inputValor = document.querySelector("#valor") as HTMLInputElement;
+        this.inputQuantidade = document.querySelector("#quantidade") as HTMLInputElement;
         this.negociacoesView.update(this.negociacoes);
 
     }
 
+    @logarTempoExecucao()
     public adicionaNegociacao() : void{
 
         const negociacao : Negociacao = this.criaNegociacao();

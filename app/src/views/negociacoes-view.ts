@@ -1,4 +1,4 @@
-import { Negociacoes } from "../models/negociacoes";
+import { Negociacoes } from "../models/negociacoes.js";
 import { View } from "./view.js";
 
 export class NegociacoesView extends View <Negociacoes>{
@@ -32,10 +32,6 @@ export class NegociacoesView extends View <Negociacoes>{
             
             </thead>
         </table>`;
-    }
-
-    update(model : Negociacoes) : void{
-        this.elemento.innerHTML = this.template(model);
     }
 
     private formatarData(data : Date) : string {

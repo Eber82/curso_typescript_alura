@@ -26,9 +26,6 @@ export class NegociacoesView extends View {
             </thead>
         </table>`;
     }
-    update(model) {
-        this.elemento.innerHTML = this.template(model);
-    }
     formatarData(data) {
         return Intl.DateTimeFormat().format(data);
     }
