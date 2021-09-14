@@ -1,9 +1,11 @@
 export function dominject(seletor) {
     return function (target, propertyKey) {
-        console.log(` MOdificando prototype ${target.constructor.name}`);
-        console.log(` Propriedade ${propertyKey}`);
+        let elemento;
         const getter = function () {
-            const elemento = document.querySelector(seletor);
+            if (!elemento) {
+                console.log(` MOdificando prototype ${target.constructor.name} adicionando Propriedade ${propertyKey}`);
+                elemento = document.querySelector(seletor);
+            }
             return elemento;
         };
         Object.defineProperty(target, propertyKey, { get: getter });

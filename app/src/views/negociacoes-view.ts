@@ -4,7 +4,7 @@ import { View } from "./view.js";
 
 export class NegociacoesView extends View <Negociacoes>{
     
-    @escapar
+    //@escapar
     protected template(model : Negociacoes) : string{
         //Essa notação com as aspas simples invertidas chama-se "template string", 
         //que dentre outras coisas permite escrever a string com quebra de linha sem usar o operador + e a interpolação do código (uso do model.lista().map... no meio da string)

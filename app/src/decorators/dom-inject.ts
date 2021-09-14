@@ -5,10 +5,17 @@ export function dominject(seletor : string){
         target : any,
         propertyKey : string
     ){
-        console.log(` MOdificando prototype ${target.constructor.name}`);
-        console.log(` Propriedade ${propertyKey}`);
+
+        //Usando o escopo da propriedade para fazer o cache 
+        let elemento : HTMLElement;
+
         const getter = function(){
-            const elemento = document.querySelector(seletor);
+            
+            if (!elemento){
+                console.log(` MOdificando prototype ${target.constructor.name} adicionando Propriedade ${propertyKey}`);
+                elemento = document.querySelector(seletor) as HTMLElement;
+            }
+            
             return elemento;
         }
     
