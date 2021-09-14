@@ -10,14 +10,12 @@ import { NegociacoesView } from "../views/negociacoes-view.js";
 import { MensagemView } from "../views/mensagem-view.js";
 import { DiasDaSemana } from "../enums/dias-da-semana.js";
 import { logarTempoExecucao } from "../decorators/logar-tempo-execucao.js";
+import { dominject } from "../decorators/dom-inject.js";
 export class NegociacaoController {
     constructor() {
         this.negociacoes = new Negociacoes();
         this.negociacoesView = new NegociacoesView("#tabelaNegociacoes", true, 'NegociacoesView');
         this.mensagemView = new MensagemView("#mensagemView", false, 'MensagemView');
-        this.inputData = document.querySelector("#data");
-        this.inputValor = document.querySelector("#valor");
-        this.inputQuantidade = document.querySelector("#quantidade");
         this.negociacoesView.update(this.negociacoes);
     }
     adicionaNegociacao() {
@@ -54,6 +52,15 @@ export class NegociacaoController {
         this.inputData.focus;
     }
 }
+__decorate([
+    dominject('#data')
+], NegociacaoController.prototype, "inputData", void 0);
+__decorate([
+    dominject('#valor')
+], NegociacaoController.prototype, "inputValor", void 0);
+__decorate([
+    dominject('#quantidade')
+], NegociacaoController.prototype, "inputQuantidade", void 0);
 __decorate([
     logarTempoExecucao()
 ], NegociacaoController.prototype, "adicionaNegociacao", null);

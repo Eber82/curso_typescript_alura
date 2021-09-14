@@ -4,11 +4,15 @@ import { NegociacoesView } from "../views/negociacoes-view.js";
 import { MensagemView } from "../views/mensagem-view.js";
 import { DiasDaSemana } from "../enums/dias-da-semana.js";
 import { logarTempoExecucao } from "../decorators/logar-tempo-execucao.js";
+import { dominject } from "../decorators/dom-inject.js";
 
 export class NegociacaoController{
 
+    @dominject('#data')
     private inputData : HTMLInputElement;
+    @dominject('#valor')
     private inputValor : HTMLInputElement;
+    @dominject('#quantidade')
     private inputQuantidade : HTMLInputElement;
     private negociacoes : Negociacoes = new Negociacoes();
     private negociacoesView : NegociacoesView = new NegociacoesView("#tabelaNegociacoes",true,'NegociacoesView');
@@ -18,9 +22,9 @@ export class NegociacaoController{
         
         // document.querySelector() pode retornar null tb, estão se a conf de compilação "strictNullChecks" estiver ativa, devo explicitar o retorno que espero
         
-        this.inputData = document.querySelector("#data") as HTMLInputElement;
+        /*this.inputData = document.querySelector("#data") as HTMLInputElement;
         this.inputValor = document.querySelector("#valor") as HTMLInputElement;
-        this.inputQuantidade = document.querySelector("#quantidade") as HTMLInputElement;
+        this.inputQuantidade = document.querySelector("#quantidade") as HTMLInputElement;*/
         this.negociacoesView.update(this.negociacoes);
 
     }
