@@ -29,9 +29,8 @@ export class NegociacaoController {
         this.limpaFormulario();
     }
     importaDados() {
-        fetch("http://localhost:8080/dados").then(res => {
-            return res.json();
-        })
+        fetch("http://localhost:8080/dados")
+            .then(res => res.json())
             .then((dados) => {
             return dados.map(dadoDeHoje => {
                 return new Negociacao(new Date(), dadoDeHoje.vezes, dadoDeHoje.montante);

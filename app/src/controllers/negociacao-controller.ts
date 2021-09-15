@@ -5,6 +5,7 @@ import { MensagemView } from "../views/mensagem-view.js";
 import { DiasDaSemana } from "../enums/dias-da-semana.js";
 import { logarTempoExecucao } from "../decorators/logar-tempo-execucao.js";
 import { dominject } from "../decorators/dom-inject.js";
+import { NegociacaoDoDia } from "../interfaces/negociacao-do-dia.js";
 
 export class NegociacaoController{
 
@@ -56,10 +57,9 @@ export class NegociacaoController{
         sei que o retorno é um array de negociacoes, então atualizo a view
         */
 
-        fetch("http://localhost:8080/dados").then(res => {
-            return res.json();
-        })
-        .then((dados : any[]) => {
+        fetch("http://localhost:8080/dados")
+        .then(res => res.json())
+        .then((dados : NegociacaoDoDia[]) => {
             return dados.map(dadoDeHoje => {
                 return new Negociacao(
                     new Date(),
