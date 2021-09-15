@@ -46,6 +46,40 @@ export class NegociacaoController{
         
     }
 
+    importaDados() : void{
+        
+        /* 
+        
+        Com o fetch recupero o json com as movimentações. O retorno é uma Promisse<Response>
+        faço o then com o Response "resp" e deste retorno o json. O retorno é uma Promisse<Any>
+        faço o then esperando um array[any] e retorno este convertido em array de negociacoes. O retorno é uma Promisse<Any>
+        sei que o retorno é um array de negociacoes, então atualizo a view
+        */
+
+        fetch("http://localhost:8080/dados").then(res => {
+            return res.json();
+        })
+        .then((dados : any[]) => {
+            return dados.map(dadoDeHoje => {
+                return new Negociacao(
+                    new Date(),
+                    dadoDeHoje.vezes,
+                    dadoDeHoje.montante);
+            })
+
+            
+        })
+        .then(listaNegociacao =>{
+            
+            for(let negociacao of listaNegociacao){
+                this.negociacoes.adiciona(negociacao);
+            }
+        
+            this.atualizaView();
+        })        
+
+        console.log('importou')}
+
     private eHdiaDaSemana(data : Date) : boolean{
         
         
