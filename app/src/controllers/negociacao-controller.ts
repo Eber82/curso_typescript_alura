@@ -6,6 +6,7 @@ import { DiasDaSemana } from "../enums/dias-da-semana.js";
 import { logarTempoExecucao } from "../decorators/logar-tempo-execucao.js";
 import { dominject } from "../decorators/dom-inject.js";
 import { NegociacaoDoDia } from "../interfaces/negociacao-do-dia.js";
+import { NegociacoesService } from "../services/negociacoes-service.js";
 
 export class NegociacaoController{
 
@@ -18,6 +19,7 @@ export class NegociacaoController{
     private negociacoes : Negociacoes = new Negociacoes();
     private negociacoesView : NegociacoesView = new NegociacoesView("#tabelaNegociacoes",true,'NegociacoesView');
     private mensagemView : MensagemView = new MensagemView("#mensagemView",false,'MensagemView');
+    private negociacoesService : NegociacoesService = new NegociacoesService();
 
     constructor(){
         
@@ -48,29 +50,9 @@ export class NegociacaoController{
     }
 
     importaDados() : void{
-        
-        /* 
-        
-        Com o fetch recupero o json com as movimentações. O retorno é uma Promisse<Response>
-        faço o then com o Response "resp" e deste retorno o json. O retorno é uma Promisse<Any>
-        faço o then esperando um array[any] e retorno este convertido em array de negociacoes. O retorno é uma Promisse<Any>
-        sei que o retorno é um array de negociacoes, então atualizo a view
-        */
-
-        fetch("http://localhost:8080/dados")
-        .then(res => res.json())
-        .then((dados : NegociacaoDoDia[]) => {
-            return dados.map(dadoDeHoje => {
-                return new Negociacao(
-                    new Date(),
-                    dadoDeHoje.vezes,
-                    dadoDeHoje.montante);
-            })
-
-            
-        })
+    
+        this.negociacoesService.obterNegociacoesDoDia()
         .then(listaNegociacao =>{
-            
             for(let negociacao of listaNegociacao){
                 this.negociacoes.adiciona(negociacao);
             }
