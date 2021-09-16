@@ -6,7 +6,8 @@
         "noImplicitAny": true,
         "removeComments": true, // Remove os comentários no .js resultante da compilação 
         "strictNullChecks": true,
-        "experimentalDecorators": true //Ativa o uso dos decorators
+        "experimentalDecorators": true, //Ativa o uso dos decorators
+        "sourceMap": true //habilita o debug no navegador. além disso é necessário que a pasta com os fontes tb estejam disponiveis no navegador (nesse caso a pasta src está abaixo de app)
     },
     "include": [
         "app/src/**/*"

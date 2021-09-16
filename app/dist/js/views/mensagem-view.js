@@ -18,3 +18,4 @@ export class MensagemView extends View {
 __decorate([
     escapar
 ], MensagemView.prototype, "template", null);
+//# sourceMappingURL=mensagem-view.js.map
