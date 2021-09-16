@@ -7,6 +7,7 @@ import { logarTempoExecucao } from "../decorators/logar-tempo-execucao.js";
 import { dominject } from "../decorators/dom-inject.js";
 import { NegociacaoDoDia } from "../interfaces/negociacao-do-dia.js";
 import { NegociacoesService } from "../services/negociacoes-service.js";
+import { imprimir } from "../utils/imprimir.js";
 
 export class NegociacaoController{
 
@@ -43,6 +44,7 @@ export class NegociacaoController{
         }
 
         this.negociacoes.adiciona(negociacao);
+        imprimir(negociacao, this.negociacoes);
         this.atualizaView();
         this.limpaFormulario();
 
@@ -52,6 +54,16 @@ export class NegociacaoController{
     importaDados() : void{
     
         this.negociacoesService.obterNegociacoesDoDia()
+        
+        .then(listaNegociacao => {
+        
+            return listaNegociacao.filter(negociacaoDoDia => {
+                    return !this.negociacoes
+                    .lista()
+                    .some(negociacao => negociacao.ehIgual(negociacaoDoDia));
+            })
+        })
+        
         .then(listaNegociacao =>{
             for(let negociacao of listaNegociacao){
                 this.negociacoes.adiciona(negociacao);
@@ -59,7 +71,6 @@ export class NegociacaoController{
         
             this.atualizaView();
         })        
-
         console.log('importou')}
 
     private eHdiaDaSemana(data : Date) : boolean{

@@ -8,4 +8,10 @@ export class Negociacoes {
     lista() {
         return this.negociacoes;
     }
+    paraTexto() {
+        return JSON.stringify(this);
+    }
+    ehIgual(negociacoes) {
+        return (this.negociacoes === negociacoes.lista());
+    }
 }

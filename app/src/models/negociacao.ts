@@ -1,4 +1,7 @@
-export class Negociacao {
+import { Imprimivel } from "../interfaces/imprimivel.js";
+import { Modelo } from "../interfaces/modelo.js";
+
+export class Negociacao implements Modelo<Negociacao> {
 
     
 
@@ -12,6 +15,17 @@ export class Negociacao {
                 public readonly valor : number){}
 
 
+
+    public static criaDe(dataString : string, quantidadeString : string, valorString : string ) : Negociacao{
+
+        const exp = /-/g; //Expressão regular para pegar todos o '-'. o g é de global, pegar todos
+        const data = new Date(dataString.replace(exp, ','));
+        const quantidade = parseInt(quantidadeString);
+        const valor = parseFloat(valorString);
+
+        return new Negociacao(data,quantidade,valor);
+    }
+
     //Programação Defensiva. a data tem que ser imutavel, mas o "private" e o "readonly" não protegem o objeto de ter seus metodos acessados
     public get data() : Date{
         const  data = new Date (this._data.getTime()); 
@@ -22,14 +36,19 @@ export class Negociacao {
         return this.valor * this.quantidade;
     }
 
-    public static criaDe(dataString : string, quantidadeString : string, valorString : string ) : Negociacao{
-        
-        const exp = /-/g; //Expressão regular para pegar todos o '-'. o g é de global, pegar todos
-        const data = new Date(dataString.replace(exp, ','));
-        const quantidade = parseInt(quantidadeString);
-        const valor = parseFloat(valorString);
+     public paraTexto() : string{
+        return `
+            Data : ${this._data}
+            Quantidade : ${this.quantidade}
+            Valor : ${this.valor}
+        `;
+    }
 
-        return new Negociacao(data,quantidade,valor);
+    public ehIgual(negociacao : Negociacao):boolean{
+
+        return ((this.data.getDate() === negociacao.data.getDate()) &&
+            (this.data.getMonth() === negociacao.data.getMonth()) &&
+            (this.data.getFullYear() === negociacao.data.getFullYear()));
     }
 
 }

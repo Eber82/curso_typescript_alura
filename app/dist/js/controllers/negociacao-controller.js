@@ -12,6 +12,7 @@ import { DiasDaSemana } from "../enums/dias-da-semana.js";
 import { logarTempoExecucao } from "../decorators/logar-tempo-execucao.js";
 import { dominject } from "../decorators/dom-inject.js";
 import { NegociacoesService } from "../services/negociacoes-service.js";
+import { imprimir } from "../utils/imprimir.js";
 export class NegociacaoController {
     constructor() {
         this.negociacoes = new Negociacoes();
@@ -27,11 +28,19 @@ export class NegociacaoController {
             return;
         }
         this.negociacoes.adiciona(negociacao);
+        imprimir(negociacao, this.negociacoes);
         this.atualizaView();
         this.limpaFormulario();
     }
     importaDados() {
         this.negociacoesService.obterNegociacoesDoDia()
+            .then(listaNegociacao => {
+            return listaNegociacao.filter(negociacaoDoDia => {
+                return !this.negociacoes
+                    .lista()
+                    .some(negociacao => negociacao.ehIgual(negociacaoDoDia));
+            });
+        })
             .then(listaNegociacao => {
             for (let negociacao of listaNegociacao) {
                 this.negociacoes.adiciona(negociacao);
